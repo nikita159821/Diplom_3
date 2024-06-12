@@ -22,7 +22,7 @@ class BasePage:
     @allure.step('Создание пользователя')
     def create_user(self):
         email, password, name = self.generate_user_data()
-        url = "https://stellarburgers.nomoreparties.site/api/auth/register"
+        url = f'{URL}{CREATE_USER}'
         data = {
             "email": email,
             "password": password,
@@ -37,7 +37,7 @@ class BasePage:
 
     @allure.step('Удаление пользователя')
     def delete_user(self, access_token):
-        url = "https://stellarburgers.nomoreparties.site/api/auth/user"
+        url = f'{URL}{DELETE_USER}'
         headers = {
             "Authorization": f"Bearer {access_token}"
         }
