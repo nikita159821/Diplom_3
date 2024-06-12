@@ -22,15 +22,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python tests.Python tests for test_add_ingredient_to_order.TestIngredientDragAndDrop.test_drag_and_drop_ingredient.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in tests.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/PycharmProjects/Diplom_nikita_merkulov_7/Diplom_3&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python tests.Python tests for test_add_ingredient_to_order.TestIngredientDragAndDrop.test_drag_and_drop_ingredient.executor": "Run",
+    "Python tests.Python tests in tests.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "develop3",
+    "last_opened_file_path": "C:/Users/user/PycharmProjects/Diplom_nikita_merkulov_7/Diplom_3"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Python tests.Python tests in tests">
     <configuration name="Python tests for test_add_ingredient_to_order.TestIngredientDragAndDrop.test_drag_and_drop_ingredient" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="Diplom_3" />
@@ -53,8 +53,9 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
@@ -62,6 +63,10 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python tests.Python tests for test_add_ingredient_to_order.TestIngredientDragAndDrop.test_drag_and_drop_ingredient" />
+      <item itemvalue="Python tests.Python tests in tests" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python tests.Python tests in tests" />
