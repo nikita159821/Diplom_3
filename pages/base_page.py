@@ -14,15 +14,6 @@ from tests.url import URL
 from selenium.webdriver.support import expected_conditions as EC, expected_conditions
 
 
-# Класс для кастомного условия ожидания
-class element_to_be:
-    def __init__(self, locator):
-        self.locator = locator
-
-    def __call__(self, driver):
-        driver.find_element(*self.locator)
-
-
 class BasePage:
     def __init__(self, browser):
         self.browser = browser
