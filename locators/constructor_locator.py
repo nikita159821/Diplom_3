@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 
 constructor_button = (By.XPATH, "//p[contains(., 'Конструктор')]")
-order_feed_button = (By.XPATH, "//p[contains(., 'Лента Заказов')]")
 ingredient = (By.XPATH, "//p[contains(., 'Соус Spicy-X')]")
 buns = (By.XPATH, "//p[contains(., 'Флюоресцентная булка R2-D3')]")
 arrange_order_button = (By.XPATH, "//button[contains(., 'Оформить заказ')]")

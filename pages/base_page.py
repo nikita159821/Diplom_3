@@ -1,15 +1,9 @@
 import allure
-import requests
 from selenium.common import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
-from locators.main_functionality_locator import order_feed_button, ingredient, buns, constructor_burger, \
-    arrange_order_button, close_modal_order, constructor_button, modal_order
-from locators.order_feed_locator import completed_all_time
-from locators.personal_account_locators import button_personal_account, email_input, password_input, button_enter, \
-    order_history_link
-from tests.helpers import generate_user_data
-from tests.url import URL, CREATE_USER, DELETE_USER
+from locators.personal_account_locators import button_personal_account
+from tests.url import URL
 from selenium.webdriver.support import expected_conditions as EC, expected_conditions
 
 
@@ -18,52 +12,10 @@ class BasePage:
         self.browser = browser
         self.actions = ActionChains(self.browser)
 
-    @allure.step('Создание пользователя')
-    def create_user(self):
-        email, password, name = generate_user_data()
-        url = f'{URL}{CREATE_USER}'
-        data = {
-            "email": email,
-            "password": password,
-            "name": name
-        }
-        response = requests.post(url, json=data)
-        response.raise_for_status()
-
-        access_token = response.json()['accessToken'].split(' ')[1]
-
-        return email, password, access_token
-
-    @allure.step('Удаление пользователя')
-    def delete_user(self, access_token):
-        url = f'{URL}{DELETE_USER}'
-        headers = {
-            "Authorization": f"Bearer {access_token}"
-        }
-        response = requests.delete(url, headers=headers)
-        response.raise_for_status()
-
-    @allure.step('Открывает страницу с конструктором + выполняет авторизацию пользователя')
-    def login(self, email, password, access_token):
-        self.open()
-        self.click_personal_account()
-        self.send_keys_email_input(email)
-        self.send_keys_password_input(password)
-        self.click_button_enter()
-        return email, password, access_token
-
     @allure.step('Общий метод для получения атрибута элемента')
     def get_attribute_of_element(self, locator, attribute):
         element = self.find(locator)
         return element.get_attribute(attribute)
-
-    @allure.step('Кастомные условия ожидания')
-    def wait_for_element(self, locator):
-        try:
-            WebDriverWait(self.browser, 3).until(expected_conditions.presence_of_element_located(locator))
-        except TimeoutException:
-            return False
-        return True
 
     @allure.step('Явное ожидание. Пока элемент не будет кликабелен')
     def wait(self, locator):
@@ -82,6 +34,14 @@ class BasePage:
     @allure.step('Общий метод для поиска элемента')
     def find(self, locator):
         return self.find_element(*locator)
+
+    @allure.step('Кастомные условия ожидания')
+    def wait_for_element(self, locator):
+        try:
+            WebDriverWait(self.browser, 3).until(expected_conditions.presence_of_element_located(locator))
+        except TimeoutException:
+            return False
+        return True
 
     @allure.step('Поиск элементов')
     def find_elements(self, *args):
@@ -113,83 +73,7 @@ class BasePage:
         element = self.find(locator)
         return element.text
 
-    @allure.step('Нажимает на кнопку "Конструктор"')
-    def click_constructor_button(self):
-        self.click_element(constructor_button)
-
-    @allure.step('Создает бургер и оформляет заказ')
-    def create_burger_and_place_order(self):
-        ingredient = self.get_ingredient()
-        buns = self.get_buns()
-        burger_constructor = self.get_constructor_burger()
-        self.drag_and_drop_element(buns, burger_constructor)
-        self.drag_and_drop_element(ingredient, burger_constructor)
-        self.click_order_button()
-
-    def create_order_and_check_in_feed(self):
-        with allure.step('Нажимаем "Конструктор"'):
-            self.click_constructor_button()
-        with allure.step('Добавляем ожидание для загрузки страницы'):
-            self.wait_for_element(ingredient)
-        with allure.step('Собираем бургер и оформляем заказ'):
-            self.create_burger_and_place_order()
-        with allure.step('Добавляем ожидание для появления окна с заказом'):
-            self.wait_for_element(close_modal_order)
-        with allure.step('Закрываем окно с заказом'):
-            self.get_close_modal_order()
-        with allure.step('Открываем страницу "Лента заказов"'):
-            self.click_order_feed_button()
-        with allure.step('Добавляем ожидание для загрузки страницы'):
-            self.wait_for_element(completed_all_time)
-
     @allure.step('Нажимает на кнопку "Личный кабинет')
     def click_personal_account(self):
         self.click_element(button_personal_account)
 
-    @allure.step('Вводит почту в поле на странице авторизации')
-    def send_keys_email_input(self, email):
-        self.browser.find_element(*email_input).send_keys(email)
-
-    @allure.step('Вводит пароль в поле на странице авторизации')
-    def send_keys_password_input(self, password):
-        self.browser.find_element(*password_input).send_keys(password)
-
-    @allure.step('Нажатие на кнопку "Войти"')
-    def click_button_enter(self):
-        self.browser.find_element(*button_enter).click()
-
-    @allure.step('Нажимает на кнопку "Лента заказов"')
-    def click_order_feed_button(self):
-        self.click_element(order_feed_button)
-
-    @allure.step('Возвращает ингредиент')
-    def get_ingredient(self):
-        return self.find(ingredient)
-
-    @allure.step('Возвращает булку')
-    def get_buns(self):
-        return self.find(buns)
-
-    @allure.step('Возвращает конструктор бургера')
-    def get_constructor_burger(self):
-        return self.find(constructor_burger)
-
-    @allure.step('Перетаскивает элемент из одного места в другое')
-    def drag_and_drop_element(self, source, target):
-        self.actions.drag_and_drop(source, target).perform()
-
-    @allure.step('Нажимает "Оформить заказ')
-    def click_order_button(self):
-        self.click_element(arrange_order_button)
-
-    @allure.step('Возвращает крестик для закрытия окна с заказом')
-    def get_close_modal_order(self):
-        self.click_element(close_modal_order)
-
-    @allure.step('Нажимает на кнопку "История заказов"')
-    def click_button_history(self):
-        self.click_element(order_history_link)
-
-    @allure.step('Возвращает номер заказа')
-    def get_modal_order_text(self):
-        return self.get_text_of_element(modal_order)

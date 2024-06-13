@@ -1,42 +1,13 @@
 import allure
-
-from locators.main_functionality_locator import ingredient, count_ingredient, modal_window_ingredient, close_modal, \
-    close_modal_window_ingredient
-from locators.order_feed_locator import *
+from locators.constructor_locator import *
+from locators.order_feed_locator import completed_all_time
 from pages.base_page import BasePage
+from pages.order_feed_page import OrderFeedPage
 
 
 class ConstructorPage(BasePage):
     def __init__(self, browser):
         super().__init__(browser)
-
-    @allure.step('Нажимает на первый заказ в списке')
-    def click_order_history(self):
-        self.click_element(order_history)
-
-    @allure.step('Возвращает окно с информацией по заказу')
-    def get_popup_order_history(self):
-        return self.find(popup_order_history)
-
-    @allure.step('Возвращает номер последнего заказа в ЛК')
-    def get_order_history_item(self):
-        return self.get_text_of_element(order_history_item)
-
-    @allure.step('Возвращает номер последнего заказа в ленте')
-    def get_order(self):
-        return self.find_elements(*order_number)[0].text
-
-    @allure.step('Возвращает количество заказов за все время')
-    def get_completed_all_time(self):
-        return self.get_text_of_element(completed_all_time)
-
-    @allure.step('Возвращает количество заказов за сегодня')
-    def get_completed_today(self):
-        return self.get_text_of_element(completed_today)
-
-    @allure.step('Возвращает количество заказов в работе')
-    def get_at_work(self):
-        return self.get_text_of_element(at_work)
 
     @allure.step('Нажимает на ингредиент')
     def click_ingredient(self):
@@ -57,4 +28,62 @@ class ConstructorPage(BasePage):
     @allure.step('Нажимает на крестик в модальном окне "Детали ингредиента"')
     def click_close_modal_window_ingredient(self):
         self.click_element(close_modal_window_ingredient)
+
+    @allure.step('Нажимает на кнопку "Конструктор"')
+    def click_constructor_button(self):
+        self.click_element(constructor_button)
+
+    @allure.step('Создает бургер и оформляет заказ')
+    def create_burger_and_place_order(self):
+        ingredient = self.get_ingredient()
+        buns = self.get_buns()
+        burger_constructor = self.get_constructor_burger()
+        self.drag_and_drop_element(buns, burger_constructor)
+        self.drag_and_drop_element(ingredient, burger_constructor)
+        self.click_order_button()
+
+    def create_order_and_check_in_feed(self):
+        order_feed_page = OrderFeedPage(self.browser)
+        with allure.step('Нажимаем "Конструктор"'):
+            self.click_constructor_button()
+        with allure.step('Добавляем ожидание для загрузки страницы'):
+            self.wait_for_element(ingredient)
+        with allure.step('Собираем бургер и оформляем заказ'):
+            self.create_burger_and_place_order()
+        with allure.step('Добавляем ожидание для появления окна с заказом'):
+            self.wait_for_element(close_modal_order)
+        with allure.step('Закрываем окно с заказом'):
+            self.get_close_modal_order()
+        with allure.step('Открываем страницу "Лента заказов"'):
+            order_feed_page.click_order_feed_button()
+        with allure.step('Добавляем ожидание для загрузки страницы'):
+            self.wait_for_element(completed_all_time)
+
+    @allure.step('Возвращает ингредиент')
+    def get_ingredient(self):
+        return self.find(ingredient)
+
+    @allure.step('Возвращает булку')
+    def get_buns(self):
+        return self.find(buns)
+
+    @allure.step('Возвращает конструктор бургера')
+    def get_constructor_burger(self):
+        return self.find(constructor_burger)
+
+    @allure.step('Перетаскивает элемент из одного места в другое')
+    def drag_and_drop_element(self, source, target):
+        self.actions.drag_and_drop(source, target).perform()
+
+    @allure.step('Нажимает "Оформить заказ')
+    def click_order_button(self):
+        self.click_element(arrange_order_button)
+
+    @allure.step('Возвращает крестик для закрытия окна с заказом')
+    def get_close_modal_order(self):
+        self.click_element(close_modal_order)
+
+    @allure.step('Возвращает номер заказа')
+    def get_modal_order_text(self):
+        return self.get_text_of_element(modal_order)
 

@@ -1,5 +1,5 @@
 import allure
-from locators.main_functionality_locator import modal_order
+from locators.constructor_locator import modal_order
 from locators.order_feed_locator import order_history_item, order_number
 from pages.base_page import BasePage
 from pages.constructor_page import ConstructorPage
