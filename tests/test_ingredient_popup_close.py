@@ -1,12 +1,12 @@
 import allure
-from pages.main_page import MainPage
+from pages.constructor_page import ConstructorPage
 
 
 class TestIngredientPopupClose:
 
     @allure.title('если кликнуть на ингредиент, появится всплывающее окно с деталями,')
     def test_ingredient_popup_close(self, browser):
-        ingredient_popup_close = MainPage(browser)
+        ingredient_popup_close = ConstructorPage(browser)
         with allure.step('Открываем страницу c конструктором'):
             ingredient_popup_close.open()
         with allure.step('Нажимаем на ингредиент'):

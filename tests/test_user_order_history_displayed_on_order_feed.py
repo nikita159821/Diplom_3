@@ -2,7 +2,7 @@ import allure
 from locators.main_functionality_locator import modal_order
 from locators.order_feed_locator import order_history_item, order_number
 from pages.base_page import BasePage
-from pages.order_feed_page import OrderFeedPage
+from pages.constructor_page import ConstructorPage
 from tests.url import URL, PROFILE
 
 
@@ -11,7 +11,7 @@ class TestUserOrderHistoryOnOrderFeed:
     @allure.step('заказы пользователя из раздела «История заказов» отображаются на странице «Лента заказов»,')
     def test_user_order_history_displayed_on_order_feed(self, browser):
         base_page = BasePage(browser)
-        user_order_history = OrderFeedPage(browser)
+        user_order_history = ConstructorPage(browser)
         with allure.step('Открываем страницу c конструктором. Проходим авторизацию'):
             email, password, access_token = base_page.create_user()
             base_page.login(email, password, access_token)

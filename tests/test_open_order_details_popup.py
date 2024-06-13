@@ -1,13 +1,13 @@
 import allure
 from locators.order_feed_locator import order_history
-from pages.order_feed_page import OrderFeedPage
+from pages.constructor_page import ConstructorPage
 
 
 class TestOrderDetailsPopup:
 
     @allure.title('Переход в раздел «История заказов»')
     def test_open_order_details_popup(self, browser):
-        order_details = OrderFeedPage(browser)
+        order_details = ConstructorPage(browser)
         with allure.step('Открываем главную страницу'):
             order_details.open()
         with allure.step('Нажимаем кнопку "Лента заказов"'):

@@ -1,3 +1,9 @@
+import random
+import string
+
+import allure
+
+
 @allure.step('Генерация случайных данных для пользователя')
 def generate_user_data():
     email = f"test-data-{random.randint(1, 10000)}@yandex.ru"

@@ -1,7 +1,7 @@
 import allure
 from locators.main_functionality_locator import modal_order
 from pages.base_page import BasePage
-from pages.main_page import MainPage
+from pages.constructor_page import ConstructorPage
 from tests.data import DEFAULT_ORDER_NUMBER
 from tests.url import URL
 
@@ -10,7 +10,7 @@ class TestOrderPlacementForLoggedInUser:
     @allure.step('залогиненный пользователь может оформить заказ.')
     def test_user_can_place_order(self, browser):
         base_page = BasePage(browser)
-        can_place_order = MainPage(browser)
+        can_place_order = ConstructorPage(browser)
         with allure.step('Открываем страницу c конструктором. Проходим авторизацию'):
             email, password, access_token = base_page.create_user()
             base_page.login(email, password, access_token)

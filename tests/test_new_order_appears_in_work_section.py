@@ -2,7 +2,7 @@ import allure
 from locators.main_functionality_locator import close_modal_order
 from locators.order_feed_locator import completed_all_time
 from pages.base_page import BasePage
-from pages.order_feed_page import OrderFeedPage
+from pages.constructor_page import ConstructorPage
 from tests.conftest import browser
 
 
@@ -11,7 +11,7 @@ class TestNewOrderAppearsInWorkSection:
     @allure.title('после оформления заказа его номер появляется в разделе В работе.')
     def test_new_order_appears_in_work_section(self, browser):
         base_page = BasePage(browser)
-        in_work = OrderFeedPage(browser)
+        in_work = ConstructorPage(browser)
         with allure.step('Открываем страницу c конструктором. Проходим авторизацию'):
             email, password, access_token = base_page.create_user()
             base_page.login(email, password, access_token)

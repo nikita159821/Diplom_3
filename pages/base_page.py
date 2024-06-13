@@ -1,7 +1,5 @@
 import allure
 import requests
-import random
-import string
 from selenium.common import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
@@ -10,7 +8,8 @@ from locators.main_functionality_locator import order_feed_button, ingredient, b
 from locators.order_feed_locator import completed_all_time
 from locators.personal_account_locators import button_personal_account, email_input, password_input, button_enter, \
     order_history_link
-from tests.url import URL
+from tests.helpers import generate_user_data
+from tests.url import URL, CREATE_USER, DELETE_USER
 from selenium.webdriver.support import expected_conditions as EC, expected_conditions
 
 
@@ -21,7 +20,7 @@ class BasePage:
 
     @allure.step('Создание пользователя')
     def create_user(self):
-        email, password, name = self.generate_user_data()
+        email, password, name = generate_user_data()
         url = f'{URL}{CREATE_USER}'
         data = {
             "email": email,
@@ -61,7 +60,7 @@ class BasePage:
     @allure.step('Кастомные условия ожидания')
     def wait_for_element(self, locator):
         try:
-            WebDriverWait(self.browser, 3).until(element_to_be(locator))
+            WebDriverWait(self.browser, 3).until(expected_conditions.presence_of_element_located(locator))
         except TimeoutException:
             return False
         return True

@@ -1,19 +1,19 @@
 import allure
-from pages.main_page import MainPage
+from pages.constructor_page import ConstructorPage
 from tests.data import COUNT_INGREDIENT
 
 
 class TestIngredientDragAndDrop:
 
     @allure.step('при добавлении ингредиента в заказ счётчик этого ингредиента увеличивается')
-    def test_drag_and_drop_ingredient(self, browser):
-        drag_and_drop = MainPage(browser)
+    def test_counter_increments_when_ingredient_added_to_order(self, browser):
+        ingredient_added_to_order = ConstructorPage(browser)
         with allure.step('Открываем страницу c конструктором'):
-            drag_and_drop.open()
+            ingredient_added_to_order.open()
         with allure.step('Получаем ингредиент и конструктор бургера'):
-            ingredient = drag_and_drop.get_ingredient()
-            burger_constructor = drag_and_drop.get_constructor_burger()
+            ingredient = ingredient_added_to_order.get_ingredient()
+            burger_constructor = ingredient_added_to_order.get_constructor_burger()
         with allure.step('Перетаскиваем ингредиент в конструктор'):
-            drag_and_drop.drag_and_drop_element(ingredient, burger_constructor)
+            ingredient_added_to_order.drag_and_drop_element(ingredient, burger_constructor)
         with allure.step('Проверяем, что счетчик ингредиента увеличился'):
-            assert drag_and_drop.get_count_ingredient() == COUNT_INGREDIENT
+            assert ingredient_added_to_order.get_count_ingredient() == COUNT_INGREDIENT

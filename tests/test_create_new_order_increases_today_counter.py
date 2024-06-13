@@ -1,7 +1,7 @@
 import allure
 from locators.order_feed_locator import completed_all_time
 from pages.base_page import BasePage
-from pages.order_feed_page import OrderFeedPage
+from pages.constructor_page import ConstructorPage
 
 
 class TestCreateNewOrderIncreasesTodayCounter:
@@ -9,7 +9,7 @@ class TestCreateNewOrderIncreasesTodayCounter:
     @allure.title('при создании нового заказа счётчик Выполнено за всё время увеличивается')
     def test_create_new_order_increases_today_counter(self, browser):
         base_page = BasePage(browser)
-        today_counter = OrderFeedPage(browser)
+        today_counter = ConstructorPage(browser)
         with allure.step('Открываем страницу c конструктором. Проходим авторизацию'):
             email, password, access_token = base_page.create_user()
             base_page.login(email, password, access_token)
