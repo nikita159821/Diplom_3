@@ -11,9 +11,12 @@ class OrderFeedPage(BasePage):
     def click_order_feed_button(self):
         self.click_element(order_feed_button)
 
-    @allure.step('Возвращает номер последнего заказа в ленте')
+    @allure.step('Возвращает список всех заказов в ленте')
     def get_order(self):
-        return self.find_elements(*order_number)[0].text
+        order = self.find_elements(*number)
+        for order_list in order:
+            order_text = order_list.text
+            return order_text
 
     @allure.step('Возвращает количество заказов за все время')
     def get_completed_all_time(self):

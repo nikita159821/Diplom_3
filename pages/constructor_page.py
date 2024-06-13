@@ -1,8 +1,12 @@
 import allure
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from locators.constructor_locator import *
 from locators.order_feed_locator import completed_all_time
 from pages.base_page import BasePage
 from pages.order_feed_page import OrderFeedPage
+from tests.conftest import browser
+from tests.url import URL
 
 
 class ConstructorPage(BasePage):
@@ -42,22 +46,32 @@ class ConstructorPage(BasePage):
         self.drag_and_drop_element(ingredient, burger_constructor)
         self.click_order_button()
 
-    def create_order_and_check_in_feed(self):
+    def wait_loading_visibility(self, browser):
+        wait = WebDriverWait(self.browser, 30)
+        wait.until(EC.visibility_of_element_located(LOADING))
+
+    def wait_loading_invisibility(self, browser):
+        wait = WebDriverWait(self.browser, 30)
+        wait.until(EC.invisibility_of_element_located(LOADING))
+
+    def create_order_and_check_in_feed(self, browser):
         order_feed_page = OrderFeedPage(self.browser)
+        user_order_history = ConstructorPage(browser)
         with allure.step('Нажимаем "Конструктор"'):
             self.click_constructor_button()
-        with allure.step('Добавляем ожидание для загрузки страницы'):
-            self.wait_for_element(ingredient)
+        with allure.step('Добавляем ожидание для загрузки страницы с конструктором'):
+            order_feed_page.wait_for_page_load(f'{URL}')
         with allure.step('Собираем бургер и оформляем заказ'):
             self.create_burger_and_place_order()
         with allure.step('Добавляем ожидание для появления окна с заказом'):
-            self.wait_for_element(close_modal_order)
+            user_order_history.wait_loading_visibility(browser)
+            user_order_history.wait_loading_invisibility(browser)
         with allure.step('Закрываем окно с заказом'):
             self.get_close_modal_order()
         with allure.step('Открываем страницу "Лента заказов"'):
             order_feed_page.click_order_feed_button()
         with allure.step('Добавляем ожидание для загрузки страницы'):
-            self.wait_for_element(completed_all_time)
+            order_feed_page.wait(completed_all_time)
 
     @allure.step('Возвращает ингредиент')
     def get_ingredient(self):
@@ -86,4 +100,3 @@ class ConstructorPage(BasePage):
     @allure.step('Возвращает номер заказа')
     def get_modal_order_text(self):
         return self.get_text_of_element(modal_order)
-

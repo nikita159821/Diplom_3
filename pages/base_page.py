@@ -1,7 +1,6 @@
 import allure
-from selenium.common import TimeoutException
 from selenium.webdriver import ActionChains
-from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support.ui import WebDriverWait
 from locators.personal_account_locators import button_personal_account
 from tests.url import URL
 from selenium.webdriver.support import expected_conditions as EC, expected_conditions
@@ -34,14 +33,6 @@ class BasePage:
     @allure.step('Общий метод для поиска элемента')
     def find(self, locator):
         return self.find_element(*locator)
-
-    @allure.step('Кастомные условия ожидания')
-    def wait_for_element(self, locator):
-        try:
-            WebDriverWait(self.browser, 3).until(expected_conditions.presence_of_element_located(locator))
-        except TimeoutException:
-            return False
-        return True
 
     @allure.step('Поиск элементов')
     def find_elements(self, *args):
@@ -76,4 +67,3 @@ class BasePage:
     @allure.step('Нажимает на кнопку "Личный кабинет')
     def click_personal_account(self):
         self.click_element(button_personal_account)
-

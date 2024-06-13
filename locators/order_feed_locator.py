@@ -7,3 +7,4 @@ completed_all_time = (By.CSS_SELECTOR, 'div.OrderFeed_ordersData__1L6Iv > div.un
 completed_today = (By.XPATH, "//p[contains(., 'Выполнено за сегодня:')]/following-sibling::p[@class='OrderFeed_number__2MbrQ text text_type_digits-large']")
 at_work = (By.XPATH, "//ul[@class='OrderFeed_orderListReady__1YFem OrderFeed_orderList__cBvyi']/li[@class='text text_type_digits-default mb-2']")
 order_feed_button = (By.XPATH, "//p[contains(., 'Лента Заказов')]")
+number = (By.CSS_SELECTOR,'#root>div>main>div>div>ul')
