@@ -1,0 +1,5 @@
+LOGIN = 'test09123@yandex.ru'
+PASSWORD = '2-Passwd'
+INGREDIENT_DETAILS = 'Детали ингредиента'
+COUNT_INGREDIENT = '1'
+DEFAULT_ORDER_NUMBER = '9999'
