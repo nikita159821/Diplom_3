@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b5da896d-f748-4e04-b79d-4a9198c4e5f4" name="Changes" comment="fg">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_add_ingredient_to_order.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_add_ingredient_to_order.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/base_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/base_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/constructor_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/constructor_page.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,16 +33,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python tests.Python tests for test_add_ingredient_to_order.TestIngredientDragAndDrop.test_drag_and_drop_ingredient.executor": "Run",
-    "Python tests.Python tests in tests.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "develop3",
-    "last_opened_file_path": "C:/Users/user/PycharmProjects/Diplom_nikita_merkulov_7/Diplom_3",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python tests.Python tests for test_add_ingredient_to_order.TestIngredientDragAndDrop.test_drag_and_drop_ingredient.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in tests.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop3&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/PycharmProjects/Diplom_nikita_merkulov_7/Diplom_3&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python tests.Python tests in tests">
     <configuration name="Python tests for test_add_ingredient_to_order.TestIngredientDragAndDrop.test_drag_and_drop_ingredient" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="Diplom_3" />

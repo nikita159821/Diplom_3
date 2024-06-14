@@ -1,5 +1,4 @@
 import allure
-from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from locators.constructor_locator import *
 from locators.order_feed_locator import completed_all_time
@@ -47,12 +46,10 @@ class ConstructorPage(BasePage):
         self.click_order_button()
 
     def wait_loading_visibility(self, browser):
-        wait = WebDriverWait(self.browser, 30)
-        wait.until(EC.visibility_of_element_located(LOADING))
+        self.wait.until(EC.visibility_of_element_located(LOADING))
 
     def wait_loading_invisibility(self, browser):
-        wait = WebDriverWait(self.browser, 30)
-        wait.until(EC.invisibility_of_element_located(LOADING))
+        self.wait.until(EC.invisibility_of_element_located(LOADING))
 
     def create_order_and_check_in_feed(self, browser):
         order_feed_page = OrderFeedPage(self.browser)

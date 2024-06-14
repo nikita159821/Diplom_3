@@ -10,6 +10,7 @@ class BasePage:
     def __init__(self, browser):
         self.browser = browser
         self.actions = ActionChains(self.browser)
+        self.wait = WebDriverWait(self.browser, 30)
 
     @allure.step('Общий метод для получения атрибута элемента')
     def get_attribute_of_element(self, locator, attribute):
